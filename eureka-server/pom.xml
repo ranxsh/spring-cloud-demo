@@ -23,8 +23,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <docker.registry.url>arp.reg.innertoon.com</docker.registry.url>
         <docker.repostory>arp.reg.innertoon.com</docker.repostory>
-        <docker.registry.name>kingsy</docker.registry.name>
+        <docker.registry.name>ranxsh</docker.registry.name>
     </properties>
 
     <dependencies>
@@ -74,43 +75,32 @@
                         </goals>
                     </execution>
                     <execution>
-                        <id>tag-image</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>tag</goal>
-                        </goals>
-                        <configuration>
-                            <image>${docker.registry.name}/${project.artifactId}:${project.version}</image>
-                            <newName>${docker.repostory}/${docker.registry.name}/${project.artifactId}:${project.version}</newName>
-                        </configuration>
-                    </execution>
-                    <execution>
                         <id>push-image</id>
-                        <phase>deploy</phase>
+                        <phase>install</phase>
                         <goals>
                             <goal>push</goal>
                         </goals>
-                        <configuration>
-                            <imageName>${docker.repostory}/${docker.registry.name}/${project.artifactId}:${project.version}</imageName>
-                        </configuration>
                     </execution>
                 </executions>
                 <configuration>
                     <serverId>innertoon</serverId>
-                    <registryUrl>arp.reg.innertoon.com</registryUrl>
-                    <pushImage>false</pushImage>
-                    <dockerDirectory>${project.basedir}/src/docker</dockerDirectory>
+                    <registryUrl>${docker.registry.url}</registryUrl>
                     <!--<imageName>${docker.repostory}/${docker.registry.name}/${project.artifactId}:${project.version}</imageName>-->
-                    <imageName>${docker.repostory}/${docker.registry.name}/${project.artifactId}:1.0.0</imageName>
+                    <imageName>${docker.repostory}/eureka-server/${project.artifactId}:${project.version}</imageName>
                     <imageTags>
+                        <!--docker的tag为项目版本号、latest-->
+                        <imageTag>${maven.build.timestamp}</imageTag>
                         <imageTag>latest</imageTag>
                     </imageTags>
+                    <entryPoint>["java", "-jar", "${project.build.finalName}.jar"]</entryPoint>
+                    <baseImage>frolvlad/alpine-oraclejdk8:slim</baseImage>
                     <resources>
                         <resource>
                             <targetPath>/</targetPath>
                             <directory>${project.build.directory}</directory>
                             <include>${project.build.finalName}.jar</include>
                         </resource>
+
                     </resources>
 <!--                    <serverId>docker-aliyun</serverId>
                     <registryUrl>registry.cn-hangzhou.aliyuncs.com</registryUrl>
