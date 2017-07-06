@@ -7,6 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 
 public class AccessFilter extends ZuulFilter {
@@ -40,6 +42,13 @@ public class AccessFilter extends ZuulFilter {
             log.warn("access token is empty");
             ctx.setSendZuulResponse(false);
             ctx.setResponseStatusCode(401);
+            HttpServletResponse response = ctx.getResponse();
+            try {
+                response.getWriter().write("accessToken error");
+                response.flushBuffer();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             return null;
         }
         log.info("access token ok");

@@ -14,9 +14,9 @@ http://localhost:8004/orderGen?goodsId=123&goodsNum=2
 B、api网关
 库存服务，订单服务可以分别部署多台然后通过api网关访问，
 网关层通过accessToken进行鉴权操作,并根据路由配置路由到相应的服务
-通过路由访问库存接口storePuls
+1、通过路由访问库存接口storePuls
 http://localhost:8001/api-store/storePuls?accessToken=123456&goodsId=123&goodsNum=2
-通过路由访问订单接口orderGen
+2、通过路由访问订单接口orderGen
 http://localhost:8001/api-order/orderGen?accessToken=123456&goodsId=123&goodsNum=2
 
 
