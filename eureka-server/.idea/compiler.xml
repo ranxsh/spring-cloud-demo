@@ -22,17 +22,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="api-gateway" />
         <module name="eureka-server" />
-        <module name="service-order" />
-        <module name="service-store" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="api-gateway" target="1.8" />
       <module name="eureka-server" target="1.8" />
-      <module name="service-order" target="1.8" />
-      <module name="service-store" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
