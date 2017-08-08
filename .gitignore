@@ -4,10 +4,10 @@ target/
 
 # Lines that start with '#' are comments.
 # IntelliJ IDEA Project files
-#.idea
+.idea
 *.iml
 *.ipr
-*.iws
+*.iws 
 out
 
 # Eclipse Project files
